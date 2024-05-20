@@ -4,6 +4,7 @@
 
 class WickedSingleton : public Counter<WickedSingleton, 1> {}; 
 class Student : public Counter<Student, 16> {};
+class Circle : public Counter<Circle, 2> {};
 
 TEST(wicked_signleton, test) {
     WickedSingleton* singleton = new WickedSingleton;
@@ -20,6 +21,13 @@ TEST(wicked_signleton, test) {
     for (size_t i = 0; i < 16; i++) {
         delete vec[i];
     }
+}
+
+TEST(counter_test, copy_ctr_test) {
+    Circle c1;
+    Circle c2 = c1;
+
+    EXPECT_THROW(Circle c3 = c2, CounterException);
 }
 
 int main() {
